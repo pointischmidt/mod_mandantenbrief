@@ -1,4 +1,4 @@
-# 📄 Mandantenbrief Modul v2.0
+# 📄 Mandantenbrief Modul v2.2
 
 **Professional Joomla 4.5+ (Joomla 6 ready)** für die automatisierte Darstellung von Steuerinformationen von onlineinfodienst.de mit intelligenter Bild-Extraktion, Caching und **YOOtheme Pro Integration**.
 
