@@ -9,6 +9,9 @@
 
 defined('_JEXEC') or die;
 
+// Ensure class file is loaded (bypass autoloader issues)
+require_once __DIR__ . '/src/Helper/Module.php';
+
 use Joomla\CMS\Helper\ModuleHelper;
 use ModMandantenbrief\Site\Helper\Module;
 
