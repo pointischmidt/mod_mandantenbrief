@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <extension type="module" client="site" method="upgrade">
     <name>MOD_MANDANTENBRIEF</name>
-    <author>Steuerberater Karl Heinz Schmidt</author>
+    <author>Marcus Schmidt</author>
     <creationDate>November 2025</creationDate>
     <copyright>Copyright (C) 2025 - djumla.dev</copyright>
     <license>GNU General Public License version 2 or later</license>
