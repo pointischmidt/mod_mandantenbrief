@@ -12,11 +12,20 @@ defined('_JEXEC') or die;
 use Joomla\CMS\Helper\ModuleHelper;
 use ModMandantenbrief\Site\Helper\Module;
 
-// Initialize module
-$moduleInstance = new Module($module, $params);
-$articles = $moduleInstance->getArticles();
-$moduleClasses = $moduleInstance->getModuleClasses();
-$debugInfo = $moduleInstance->getDebugInfo();
-
-// Load template
-require ModuleHelper::getLayoutPath('mod_mandantenbrief', $params->get('layout', 'default'));
+// Initialize module with proper error handling
+try {
+    $moduleInstance = new Module($module, $params);
+    $articles = $moduleInstance->getArticles();
+    $moduleClasses = $moduleInstance->getModuleClasses();
+    $debugInfo = $moduleInstance->getDebugInfo();
+    
+    // Load template
+    require ModuleHelper::getLayoutPath('mod_mandantenbrief', $params->get('layout', 'default'));
+    
+} catch (Exception $e) {
+    // Fallback for development
+    echo '<div class="uk-alert uk-alert-danger">';
+    echo '<h4>Modul-Fehler</h4>';
+    echo '<p>' . htmlspecialchars($e->getMessage()) . '</p>';
+    echo '</div>';
+}
