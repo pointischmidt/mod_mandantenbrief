@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<extension type="module" client="site" method="upgrade">
+<extension type="module" version="4.0" client="site" method="upgrade">
     <name>MOD_MANDANTENBRIEF</name>
     <author>Marcus Schmidt</author>
     <creationDate>November 2025</creationDate>
@@ -7,7 +7,7 @@
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>info@djumla.dev</authorEmail>
     <authorUrl>https://djumla.dev</authorUrl>
-    <version>2.0.1</version>
+    <version>2.0.2</version>
     <description>MOD_MANDANTENBRIEF_XML_DESCRIPTION</description>
     
     <files>
@@ -25,7 +25,357 @@
     
     <config>
         <fields name="params">
-            <!-- ... unchanged ... -->
+            <fieldset name="basic" label="MOD_MANDANTENBRIEF_FIELDSET_BASIC">
+                <field
+                    name="show_title"
+                    type="radio"
+                    label="MOD_MANDANTENBRIEF_FIELD_SHOW_TITLE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_SHOW_TITLE_DESC"
+                    class="btn-group btn-group-yesno"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                    name="module_title"
+                    type="text"
+                    label="MOD_MANDANTENBRIEF_FIELD_MODULE_TITLE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_MODULE_TITLE_DESC"
+                    default="Aktuelle Steuerinformationen"
+                    showon="show_title:1"
+                    size="40" />
+
+                <field
+                    name="infodienst_url"
+                    type="url"
+                    label="MOD_MANDANTENBRIEF_FIELD_INFODIENST_URL_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_INFODIENST_URL_DESC"
+                    default="https://onlineinfodienst.de/meine-steuer/index/"
+                    required="true"
+                    size="80" />
+
+                <field
+                    name="max_articles"
+                    type="number"
+                    label="MOD_MANDANTENBRIEF_FIELD_MAX_ARTICLES_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_MAX_ARTICLES_DESC"
+                    default="12"
+                    first="1"
+                    last="50"
+                    step="1" />
+            </fieldset>
+
+            <fieldset name="elements" label="MOD_MANDANTENBRIEF_FIELDSET_ELEMENTS">
+                <field
+                    name="show_date"
+                    type="radio"
+                    label="MOD_MANDANTENBRIEF_FIELD_SHOW_DATE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_SHOW_DATE_DESC"
+                    class="btn-group btn-group-yesno"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                    name="show_excerpt"
+                    type="radio"
+                    label="MOD_MANDANTENBRIEF_FIELD_SHOW_EXCERPT_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_SHOW_EXCERPT_DESC"
+                    class="btn-group btn-group-yesno"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                    name="excerpt_limit"
+                    type="number"
+                    label="MOD_MANDANTENBRIEF_FIELD_EXCERPT_LIMIT_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_EXCERPT_LIMIT_DESC"
+                    default="150"
+                    first="50"
+                    last="500"
+                    step="10"
+                    showon="show_excerpt:1" />
+
+                <field
+                    name="show_image"
+                    type="radio"
+                    label="MOD_MANDANTENBRIEF_FIELD_SHOW_IMAGE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_SHOW_IMAGE_DESC"
+                    class="btn-group btn-group-yesno"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                    name="fallback_image"
+                    type="media"
+                    label="MOD_MANDANTENBRIEF_FIELD_FALLBACK_IMAGE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_FALLBACK_IMAGE_DESC"
+                    directory="images/mod_mandantenbrief"
+                    showon="show_image:1" />
+
+                <field
+                    name="show_readmore"
+                    type="radio"
+                    label="MOD_MANDANTENBRIEF_FIELD_SHOW_READMORE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_SHOW_READMORE_DESC"
+                    class="btn-group btn-group-yesno"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                    name="readmore_text"
+                    type="text"
+                    label="MOD_MANDANTENBRIEF_FIELD_READMORE_TEXT_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_READMORE_TEXT_DESC"
+                    default="Weiterlesen"
+                    showon="show_readmore:1"
+                    size="20" />
+            </fieldset>
+
+            <fieldset name="layout" label="MOD_MANDANTENBRIEF_FIELDSET_LAYOUT">
+                <field
+                    name="layout_style"
+                    type="list"
+                    label="MOD_MANDANTENBRIEF_FIELD_LAYOUT_STYLE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_LAYOUT_STYLE_DESC"
+                    default="grid">
+                    <option value="grid">MOD_MANDANTENBRIEF_OPTION_GRID</option>
+                    <option value="list">MOD_MANDANTENBRIEF_OPTION_LIST</option>
+                    <option value="masonry">MOD_MANDANTENBRIEF_OPTION_MASONRY</option>
+                </field>
+
+                <field
+                    name="grid_gap"
+                    type="list"
+                    label="MOD_MANDANTENBRIEF_FIELD_GRID_GAP_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_GRID_GAP_DESC"
+                    default="medium"
+                    showon="layout_style:grid,masonry">
+                    <option value="small">MOD_MANDANTENBRIEF_OPTION_SMALL</option>
+                    <option value="medium">MOD_MANDANTENBRIEF_OPTION_MEDIUM</option>
+                    <option value="large">MOD_MANDANTENBRIEF_OPTION_LARGE</option>
+                    <option value="collapse">MOD_MANDANTENBRIEF_OPTION_COLLAPSE</option>
+                </field>
+
+                <field
+                    name="responsive_mobile_portrait"
+                    type="number"
+                    label="MOD_MANDANTENBRIEF_FIELD_RESPONSIVE_MOBILE_PORTRAIT_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_RESPONSIVE_MOBILE_PORTRAIT_DESC"
+                    default="1"
+                    first="1"
+                    last="4"
+                    step="1"
+                    showon="layout_style:grid" />
+
+                <field
+                    name="responsive_mobile_landscape"
+                    type="number"
+                    label="MOD_MANDANTENBRIEF_FIELD_RESPONSIVE_MOBILE_LANDSCAPE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_RESPONSIVE_MOBILE_LANDSCAPE_DESC"
+                    default="2"
+                    first="1"
+                    last="4"
+                    step="1"
+                    showon="layout_style:grid" />
+
+                <field
+                    name="responsive_tablet"
+                    type="number"
+                    label="MOD_MANDANTENBRIEF_FIELD_RESPONSIVE_TABLET_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_RESPONSIVE_TABLET_DESC"
+                    default="2"
+                    first="1"
+                    last="6"
+                    step="1"
+                    showon="layout_style:grid" />
+
+                <field
+                    name="responsive_desktop"
+                    type="number"
+                    label="MOD_MANDANTENBRIEF_FIELD_RESPONSIVE_DESKTOP_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_RESPONSIVE_DESKTOP_DESC"
+                    default="3"
+                    first="1"
+                    last="8"
+                    step="1"
+                    showon="layout_style:grid" />
+            </fieldset>
+
+            <fieldset name="cards" label="MOD_MANDANTENBRIEF_FIELDSET_CARDS">
+                <field
+                    name="card_style"
+                    type="list"
+                    label="MOD_MANDANTENBRIEF_FIELD_CARD_STYLE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_CARD_STYLE_DESC"
+                    default="default">
+                    <option value="default">MOD_MANDANTENBRIEF_OPTION_DEFAULT</option>
+                    <option value="primary">MOD_MANDANTENBRIEF_OPTION_PRIMARY</option>
+                    <option value="secondary">MOD_MANDANTENBRIEF_OPTION_SECONDARY</option>
+                    <option value="muted">MOD_MANDANTENBRIEF_OPTION_MUTED</option>
+                    <option value="hover">MOD_MANDANTENBRIEF_OPTION_HOVER</option>
+                </field>
+
+                <field
+                    name="card_size"
+                    type="list"
+                    label="MOD_MANDANTENBRIEF_FIELD_CARD_SIZE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_CARD_SIZE_DESC"
+                    default="medium">
+                    <option value="small">MOD_MANDANTENBRIEF_OPTION_SMALL</option>
+                    <option value="medium">MOD_MANDANTENBRIEF_OPTION_MEDIUM</option>
+                    <option value="large">MOD_MANDANTENBRIEF_OPTION_LARGE</option>
+                </field>
+
+                <field
+                    name="image_position"
+                    type="list"
+                    label="MOD_MANDANTENBRIEF_FIELD_IMAGE_POSITION_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_IMAGE_POSITION_DESC"
+                    default="top"
+                    showon="show_image:1">
+                    <option value="top">MOD_MANDANTENBRIEF_OPTION_TOP</option>
+                    <option value="bottom">MOD_MANDANTENBRIEF_OPTION_BOTTOM</option>
+                    <option value="left">MOD_MANDANTENBRIEF_OPTION_LEFT</option>
+                    <option value="right">MOD_MANDANTENBRIEF_OPTION_RIGHT</option>
+                </field>
+
+                <field
+                    name="image_transition"
+                    type="list"
+                    label="MOD_MANDANTENBRIEF_FIELD_IMAGE_TRANSITION_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_IMAGE_TRANSITION_DESC"
+                    default="scale-up"
+                    showon="show_image:1">
+                    <option value="">MOD_MANDANTENBRIEF_OPTION_NONE</option>
+                    <option value="scale-up">MOD_MANDANTENBRIEF_OPTION_SCALE_UP</option>
+                    <option value="scale-down">MOD_MANDANTENBRIEF_OPTION_SCALE_DOWN</option>
+                </field>
+            </fieldset>
+
+            <fieldset name="styling" label="MOD_MANDANTENBRIEF_FIELDSET_STYLING">
+                <field
+                    name="custom_css_class"
+                    type="text"
+                    label="MOD_MANDANTENBRIEF_FIELD_CUSTOM_CSS_CLASS_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_CUSTOM_CSS_CLASS_DESC"
+                    size="40" />
+
+                <field
+                    name="title_tag"
+                    type="list"
+                    label="MOD_MANDANTENBRIEF_FIELD_TITLE_TAG_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_TITLE_TAG_DESC"
+                    default="h3">
+                    <option value="h1">H1</option>
+                    <option value="h2">H2</option>
+                    <option value="h3">H3</option>
+                    <option value="h4">H4</option>
+                    <option value="h5">H5</option>
+                    <option value="h6">H6</option>
+                    <option value="div">DIV</option>
+                    <option value="p">P</option>
+                </field>
+
+                <field
+                    name="text_align"
+                    type="list"
+                    label="MOD_MANDANTENBRIEF_FIELD_TEXT_ALIGN_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_TEXT_ALIGN_DESC"
+                    default="left">
+                    <option value="left">MOD_MANDANTENBRIEF_OPTION_LEFT</option>
+                    <option value="center">MOD_MANDANTENBRIEF_OPTION_CENTER</option>
+                    <option value="right">MOD_MANDANTENBRIEF_OPTION_RIGHT</option>
+                    <option value="justify">MOD_MANDANTENBRIEF_OPTION_JUSTIFY</option>
+                </field>
+            </fieldset>
+
+            <fieldset name="performance" label="MOD_MANDANTENBRIEF_FIELDSET_PERFORMANCE">
+                <field
+                    name="cache_ttl"
+                    type="list"
+                    label="MOD_MANDANTENBRIEF_FIELD_CACHE_TTL_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_CACHE_TTL_DESC"
+                    default="7">
+                    <option value="1">MOD_MANDANTENBRIEF_OPTION_1_DAY</option>
+                    <option value="3">MOD_MANDANTENBRIEF_OPTION_3_DAYS</option>
+                    <option value="7">MOD_MANDANTENBRIEF_OPTION_1_WEEK</option>
+                    <option value="14">MOD_MANDANTENBRIEF_OPTION_2_WEEKS</option>
+                    <option value="30">MOD_MANDANTENBRIEF_OPTION_1_MONTH</option>
+                </field>
+
+                <field
+                    name="lazy_loading"
+                    type="radio"
+                    label="MOD_MANDANTENBRIEF_FIELD_LAZY_LOADING_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_LAZY_LOADING_DESC"
+                    class="btn-group btn-group-yesno"
+                    default="1">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                    name="preload_images"
+                    type="radio"
+                    label="MOD_MANDANTENBRIEF_FIELD_PRELOAD_IMAGES_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_PRELOAD_IMAGES_DESC"
+                    class="btn-group btn-group-yesno"
+                    default="0">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+            </fieldset>
+
+            <fieldset name="advanced" label="MOD_MANDANTENBRIEF_FIELDSET_ADVANCED">
+                <field
+                    name="debug_mode"
+                    type="radio"
+                    label="MOD_MANDANTENBRIEF_FIELD_DEBUG_MODE_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_DEBUG_MODE_DESC"
+                    class="btn-group btn-group-yesno"
+                    default="0">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                    name="force_refresh"
+                    type="radio"
+                    label="MOD_MANDANTENBRIEF_FIELD_FORCE_REFRESH_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_FORCE_REFRESH_DESC"
+                    class="btn-group btn-group-yesno"
+                    default="0">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+
+                <field
+                    name="user_agent"
+                    type="text"
+                    label="MOD_MANDANTENBRIEF_FIELD_USER_AGENT_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_USER_AGENT_DESC"
+                    default="Mozilla/5.0 (compatible; Mandantenbrief/2.0)"
+                    size="80" />
+
+                <field
+                    name="timeout"
+                    type="number"
+                    label="MOD_MANDANTENBRIEF_FIELD_TIMEOUT_LABEL"
+                    description="MOD_MANDANTENBRIEF_FIELD_TIMEOUT_DESC"
+                    default="30"
+                    first="5"
+                    last="120"
+                    step="5" />
+            </fieldset>
         </fields>
     </config>
     
