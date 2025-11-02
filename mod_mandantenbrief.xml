@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" client="site" method="upgrade">
+    <name>MOD_MANDANTENBRIEF</name>
+    <author>Steuerberater Karl Heinz Schmidt</author>
+    <creationDate>November 2025</creationDate>
+    <copyright>Copyright (C) 2025 - djumla.dev</copyright>
+    <license>GNU General Public License version 2 or later</license>
+    <authorEmail>info@djumla.dev</authorEmail>
+    <authorUrl>https://djumla.dev</authorUrl>
+    <version>2.0.0</version>
+    <description>MOD_MANDANTENBRIEF_XML_DESCRIPTION</description>
+    
+    <files>
+        <filename module="mod_mandantenbrief">mod_mandantenbrief.php</filename>
+        <folder>src</folder>
+        <folder>tmpl</folder>
+        <folder>language</folder>
+        <folder>assets</folder>
+    </files>
+    
+    <languages>
+        <language tag="de-DE">language/de-DE/de-DE.mod_mandantenbrief.ini</language>
+        <language tag="en-GB">language/en-GB/en-GB.mod_mandantenbrief.ini</language>
+    </languages>
+    
+    <config>
+        <fields name="params">
+            
+            <!-- CONTENT SETTINGS -->
+            <fieldset name="content" label="MOD_MANDANTENBRIEF_FIELDSET_CONTENT">
+                <field name="infodienst_url" type="url" 
+                       label="MOD_MANDANTENBRIEF_FIELD_INFODIENST_URL_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_INFODIENST_URL_DESC" 
+                       default="https://onlineinfodienst.de/meine-steuer/index/" 
+                       required="true" />
+                       
+                <field name="max_articles" type="number" 
+                       label="MOD_MANDANTENBRIEF_FIELD_MAX_ARTICLES_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_MAX_ARTICLES_DESC" 
+                       default="12" min="1" max="50" />
+                       
+                <field name="show_elements" type="checkboxes" 
+                       label="MOD_MANDANTENBRIEF_FIELD_SHOW_ELEMENTS_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_SHOW_ELEMENTS_DESC" 
+                       default="title,excerpt,date,image">
+                    <option value="title">MOD_MANDANTENBRIEF_OPTION_TITLE</option>
+                    <option value="excerpt">MOD_MANDANTENBRIEF_OPTION_EXCERPT</option>
+                    <option value="date">MOD_MANDANTENBRIEF_OPTION_DATE</option>
+                    <option value="image">MOD_MANDANTENBRIEF_OPTION_IMAGE</option>
+                    <option value="readmore">MOD_MANDANTENBRIEF_OPTION_READMORE</option>
+                </field>
+                
+                <field name="cache_ttl" type="list" 
+                       label="MOD_MANDANTENBRIEF_FIELD_CACHE_TTL_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_CACHE_TTL_DESC" 
+                       default="7">
+                    <option value="1">1 Tag</option>
+                    <option value="3">3 Tage</option>
+                    <option value="7">1 Woche</option>
+                    <option value="14">2 Wochen</option>
+                    <option value="30">1 Monat</option>
+                </field>
+            </fieldset>
+            
+            <!-- YOOTHEME LAYOUT -->
+            <fieldset name="yootheme_layout" label="MOD_MANDANTENBRIEF_FIELDSET_LAYOUT">
+                <field name="layout_type" type="list" 
+                       label="MOD_MANDANTENBRIEF_FIELD_LAYOUT_TYPE_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_LAYOUT_TYPE_DESC" 
+                       default="grid">
+                    <option value="grid">Grid Layout</option>
+                    <option value="list">List Layout</option>
+                    <option value="masonry">Masonry Layout</option>
+                </field>
+                
+                <field name="grid_columns" type="text" 
+                       label="MOD_MANDANTENBRIEF_FIELD_GRID_COLUMNS_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_GRID_COLUMNS_DESC" 
+                       default="1@s 2@m 3@l" 
+                       placeholder="1@s 2@m 3@l" />
+                       
+                <field name="grid_gap" type="list" 
+                       label="MOD_MANDANTENBRIEF_FIELD_GRID_GAP_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_GRID_GAP_DESC" 
+                       default="medium">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                    <option value="collapse">No Gap</option>
+                </field>
+                
+                <field name="grid_divider" type="list" 
+                       label="MOD_MANDANTENBRIEF_FIELD_GRID_DIVIDER_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_GRID_DIVIDER_DESC" 
+                       default="">
+                    <option value="">No Divider</option>
+                    <option value="uk-grid-divider">Grid Divider</option>
+                </field>
+            </fieldset>
+            
+            <!-- YOOTHEME CARD DESIGN -->
+            <fieldset name="yootheme_card" label="MOD_MANDANTENBRIEF_FIELDSET_CARD">
+                <field name="card_style" type="list" 
+                       label="MOD_MANDANTENBRIEF_FIELD_CARD_STYLE_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_CARD_STYLE_DESC" 
+                       default="default">
+                    <option value="default">Default</option>
+                    <option value="primary">Primary</option>
+                    <option value="secondary">Secondary</option>
+                    <option value="hover">Hover Effect</option>
+                </field>
+                
+                <field name="card_size" type="list" 
+                       label="MOD_MANDANTENBRIEF_FIELD_CARD_SIZE_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_CARD_SIZE_DESC" 
+                       default="medium">
+                    <option value="small">Small</option>
+                    <option value="medium">Medium</option>
+                    <option value="large">Large</option>
+                </field>
+                
+                <field name="image_transition" type="list" 
+                       label="MOD_MANDANTENBRIEF_FIELD_IMAGE_TRANSITION_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_IMAGE_TRANSITION_DESC" 
+                       default="scale-up">
+                    <option value="">No Effect</option>
+                    <option value="scale-up">Scale Up</option>
+                    <option value="scale-down">Scale Down</option>
+                </field>
+            </fieldset>
+            
+            <!-- YOOTHEME INTEGRATION -->
+            <fieldset name="yootheme_integration" label="MOD_MANDANTENBRIEF_FIELDSET_INTEGRATION">
+                <field name="inherit_theme_colors" type="radio" 
+                       label="MOD_MANDANTENBRIEF_FIELD_INHERIT_COLORS_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_INHERIT_COLORS_DESC" 
+                       default="1" class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                
+                <field name="use_theme_typography" type="radio" 
+                       label="MOD_MANDANTENBRIEF_FIELD_INHERIT_TYPOGRAPHY_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_INHERIT_TYPOGRAPHY_DESC" 
+                       default="1" class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                
+                <field name="custom_css_class" type="text" 
+                       label="MOD_MANDANTENBRIEF_FIELD_CUSTOM_CSS_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_CUSTOM_CSS_DESC" 
+                       default="" />
+            </fieldset>
+            
+            <!-- DEBUG & DEVELOPMENT -->
+            <fieldset name="debug" label="MOD_MANDANTENBRIEF_FIELDSET_DEBUG">
+                <field name="enable_debug" type="radio" 
+                       label="MOD_MANDANTENBRIEF_FIELD_ENABLE_DEBUG_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_ENABLE_DEBUG_DESC" 
+                       default="0" class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+                
+                <field name="debug_level" type="list" 
+                       label="MOD_MANDANTENBRIEF_FIELD_DEBUG_LEVEL_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_DEBUG_LEVEL_DESC" 
+                       default="basic" showon="enable_debug:1">
+                    <option value="basic">Basic Info</option>
+                    <option value="detailed">Detailed Info</option>
+                    <option value="verbose">Full Verbose</option>
+                </field>
+                
+                <field name="clear_cache" type="radio" 
+                       label="MOD_MANDANTENBRIEF_FIELD_CLEAR_CACHE_LABEL" 
+                       description="MOD_MANDANTENBRIEF_FIELD_CLEAR_CACHE_DESC" 
+                       default="0" class="btn-group btn-group-yesno">
+                    <option value="1">JYES</option>
+                    <option value="0">JNO</option>
+                </field>
+            </fieldset>
+            
+        </fields>
+    </config>
+    
+    <updateservers>
+        <server type="extension" priority="1" name="Mandantenbrief Module Updates">
+            https://github.com/pointischmidt/mod_mandantenbrief/releases/latest/download/update.xml
+        </server>
+    </updateservers>
+    
+</extension>
