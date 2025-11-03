@@ -2,7 +2,7 @@
 <extension type="module" version="4.0" client="site" method="upgrade">
     <name>MOD_MANDANTENBRIEF</name>
     <author>Marcus Schmidt</author>
-    <creationDate>November 2025</creationDate>
+    <creationDate>03 November 2025</creationDate>
     <copyright>Copyright (C) 2025 - djumla.dev</copyright>
     <license>GNU General Public License version 2 or later</license>
     <authorEmail>info@djumla.dev</authorEmail>
@@ -51,7 +51,7 @@
                     type="url"
                     label="MOD_MANDANTENBRIEF_FIELD_INFODIENST_URL_LABEL"
                     description="MOD_MANDANTENBRIEF_FIELD_INFODIENST_URL_DESC"
-                    default="https://onlineinfodienst.de/meine-steuer/index/"
+                    default="https://onlineinfodienst.de/meine-steuer/"
                     required="true"
                     size="80" />
 
