@@ -1,6 +1,6 @@
-# 📄 Mandantenbrief Modul v2.2
+# 📄 Mandantenbrief Modul v2.0.2
 
-**Professional Joomla 4.5+ (Joomla 6 ready)** für die automatisierte Darstellung von Steuerinformationen von onlineinfodienst.de mit intelligenter Bild-Extraktion, Caching und **YOOtheme Pro Integration**.
+**Professional Joomla 5+ Module** für die automatisierte Darstellung von Steuerinformationen von onlineinfodienst.de mit intelligenter Bild-Extraktion, Caching und **YOOtheme Pro Integration**.
 
 ## 🚀 **Key Features**
 
@@ -35,77 +35,68 @@
 4. "Überprüfen und installieren" klicken
 ```
 
-### **Neue Features v2.0**
-- **82 Parameter → 20 Parameter** reduziert für bessere UX
-- **YOOtheme-konforme Struktur** mit Grid-Format `1@s 2@m 3@l`
+### **Neue Features v2.0.2**
+- **Vollständige XML-Feldsets** mit allen Konfigurationsoptionen
+- **Stabile Module.php** mit allen benötigten Public-Methoden
+- **YOOtheme-konforme Template-Struktur** 
 - **GitHub-Integration** für automatische Updates
-- **Tools-Seiten-Support** für `/tools.html`
-- **Enhanced Image-Caching** mit Error-Handling
-- **Namespace-Struktur** für Joomla 4.5+
+- **Enhanced Debugging** mit detaillierter Fehleranalyse
+- **Namespace-Struktur** für moderne Joomla-Standards
 
 ---
 
 ## 🔧 **Kompatibilität**
-- Getestet auf **Joomla 4.5**
-- API/Namespace-konform für **Joomla 5**
-- Architektur und Deprecations **Joomla 6 ready** (keine veralteten J3/J4 APIs, keine Legacy-Helper)
+- **Joomla 4.x**: Vollständig getestet und optimiert
+- **Joomla 5.x**: API/Namespace-konform und ready
+- **YOOtheme Pro**: Native Integration mit UIkit-Framework
+- **PHP 8+**: Moderne PHP-Standards unterstützt
 
 ---
 
 ## ⚙️ **Konfiguration**
 
-### **Inhalte & Quelle**
-- **Infodienst URL**: `https://onlineinfodienst.de/meine-steuer/index/`
+### **Grundeinstellungen**
+- **Infodienst URL**: `https://onlineinfodienst.de/meine-steuer/`
 - **Maximale Artikel**: 1-50 Artikel pro Seite
-- **Angezeigte Elemente**: Titel, Teaser, Datum, Bild, Weiterlesen
-- **Cache-Dauer**: 1 Tag bis 1 Monat
+- **Modultitel**: Anpassbarer Titel mit Ein/Aus-Schalter
 
-### **Layout & Grid (YOOtheme-kompatibel)**
+### **Anzeigeelemente**
+- **Datum anzeigen**: Artikeldatum mit/ohne Icon
+- **Kurzbeschreibung**: Automatisch generierte Excerpts
+- **Bilder**: Intelligente Extraktion mit Fallback-System
+- **Weiterlesen-Links**: Konfigurierbare Call-to-Actions
+
+### **Layout & Responsive (7 Tabs verfügbar)**
 - **Layout-Typ**: Grid, List, Masonry
-- **Grid-Spalten**: `1@s 2@m 3@l` Format
+- **Grid-Spalten**: Mobile (1-4), Tablet (1-6), Desktop (1-8)
 - **Grid-Abstand**: Small, Medium, Large, No Gap
-- **Karten-Stil**: Default, Primary, Secondary, Hover
+- **Karten-Design**: Default, Primary, Secondary, Muted, Hover
 
-### **YOOtheme Integration**
-- **Theme-Farben übernehmen**: Automatisch aus YOOtheme
-- **Theme-Typografie übernehmen**: Schriftarten erben
-- **Eigene CSS-Klasse**: Zusätzliche Container-Klassen
+### **Performance & Cache**
+- **Cache-TTL**: 1 Tag bis 1 Monat
+- **Lazy Loading**: Für bessere Performance
+- **Bild-Preloading**: Erste Bilder sofort laden
 
----
-
-## 🔨 **Supported Content Types**
-
-### **Index-Seiten** (`/index/`)
-- ✅ `moses_index_item` Artikel-Extraktion
-- ✅ H4-Teaser-Text-Parsing  
-- ✅ Featured-Image-Extraktion
-- ✅ Datum-Extraktion
-- ✅ Link-Generierung zu Einzelartikeln
-
-### **Tools-Seiten** (`/tools.html`)
-- ✅ H3-Überschriften als Titel
-- ✅ Folgende Paragraph als Beschreibung
-- ✅ Link-Extraktion zu Tools
-- ✅ Spezielle "Tool"-Kennzeichnung
-
-### **Einzelartikel** (`/text/`)
-- ✅ Vollständige HTML-Darstellung
-- ✅ URL-Replacement für interne Links
-- ✅ Responsive Container
+### **Erweiterte Optionen**
+- **Debug-Modus**: Detaillierte Entwickler-Informationen
+- **User-Agent**: Anpassbar für spezielle Anforderungen
+- **Timeout**: Konfigurierbare Wartezeiten
 
 ---
 
 ## 🐛 **Debug & Entwicklung**
 
 ### **Debug-Modi**
-- **Basic**: Grundlegende Infos (URL, Artikel-Count, Cache-Status)
-- **Detailed**: Erweiterte Infos (Parsing-Details, Image-Cache)
-- **Verbose**: Vollständige Debug-Ausgabe (alle Variablen)
+- **Aktivierung**: Erweiterte Optionen → Debug-Modus → Ja
+- **Ausgabe**: Timestamp, URL, Content-Length, Artikel-Count
+- **Image-Debug**: Detaillierte Bild-Extraktion-Logs
+- **Cache-Status**: Aktuelle Cache-Statistiken
 
-### **Cache-Verwaltung**
-- **Cache-Statistiken**: Anzahl, Größe, Älteste/Neueste Datei
-- **Cache-Clearing**: Einmaliges Löschen aller Cache-Dateien
-- **TTL-Management**: Automatische Bereinigung alter Dateien
+### **Troubleshooting**
+- **Internal Server Error**: Meist durch inkompatible Dateiversionen
+- **Keine Artikel**: URL oder Parsing-Problem
+- **Bilder fehlen**: Cache-Ordner Berechtigungen prüfen
+- **Layout-Probleme**: YOOtheme-Integration in CSS
 
 ---
 
@@ -113,21 +104,25 @@
 
 ```
 mod_mandantenbrief/
-├── mod_mandantenbrief.php          # Entry Point
-├── mod_mandantenbrief.xml          # YOOtheme-optimierte Parameter
+├── mod_mandantenbrief.php          # Entry Point (247 Zeichen)
+├── mod_mandantenbrief.xml          # XML mit 7 Fieldsets (17KB)
 ├── src/Helper/
-│   ├── Module.php                  # Haupt-Logik
+│   ├── Module.php                  # Haupt-Klasse (12KB)
 │   ├── ParserHelper.php            # Content-Parsing
 │   └── CacheHelper.php             # Image-Cache
-├── tmpl/default.php                # YOOtheme-Template
+├── tmpl/default.php                # YOOtheme-Template (8.4KB)
 └── language/                       # DE/EN Sprachdateien
+    ├── de-DE/de-DE.mod_mandantenbrief.ini
+    └── en-GB/en-GB.mod_mandantenbrief.ini
 ```
 
 ---
 
 ## 🔄 **Updates**
 
-**Automatische Updates** aus GitHub sind konfiguriert. Das Modul überprüft automatisch auf neue Versionen.
+**Automatische Updates** aus GitHub sind konfiguriert. Das Modul überprüft automatisch auf neue Versionen über den integrierten Update-Server.
+
+**Aktuelle Version**: 2.0.2 (November 2025)
 
 ---
 
